@@ -40,7 +40,16 @@ let haveGamepadEvent = 'GamepadEvent' in window,
 	button_ZR = false;
 
 if (typeof viewer == 'undefined') { var viewer = WALK.getViewer(); }
-
+var gamepadReady = false;
+viewer.onSceneLoadComplete(function() {
+	gamepadReady = true;
+});
+viewer.onViewSwitchStarted(function() {
+	gamepadReady = false;
+});
+viewer.onViewSwitchDone(function() {
+	gamepadReady = true;
+});
 
 function connectHandler(e) {
 	console.log('connected : ' + e.gamepad.id);
